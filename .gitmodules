@@ -1,0 +1,3 @@
+[submodule "src/wren"]
+	path = src/wren
+	url = https://github.com/munificent/wren
