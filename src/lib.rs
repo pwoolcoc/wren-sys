@@ -1,6 +1,5 @@
 #![allow(non_snake_case)]
 #![feature(libc)]
-
 extern crate libc;
 
 #[derive(Copy)]
@@ -58,8 +57,7 @@ extern "C" {
                             length: ::libc::c_int);
 }
 
-#[cfg(test)]
-mod test {
+#[cfg(test)] mod test {
     use std::default::Default;
     use super::{wrenNewVM, WrenConfiguration, wrenInterpret,
                 wrenFreeVM, WREN_RESULT_SUCCESS, };
@@ -70,7 +68,7 @@ mod test {
     fn test_new_vm() {
         unsafe {
             let mut config: WrenConfiguration = Default::default();
-            let mut vm = wrenNewVM(&mut config);
+            let vm = wrenNewVM(&mut config);
             let source_path = OsStr::from_str("").to_cstring().as_ptr();
             let source = OsStr::from_str(r#"
 class Unicorn {
