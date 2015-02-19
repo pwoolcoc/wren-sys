@@ -11,7 +11,7 @@ fn main() {
 
     let mut make = Command::new("make");
 
-    assert!(make.cwd(&wren_dir)
+    assert!(make.cwd(&Path::new("src/wren"))
                 .arg("release")
                 .stdout(InheritFd(1))
                 .stderr(InheritFd(2))
