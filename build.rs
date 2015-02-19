@@ -1,6 +1,6 @@
-use std::io::{fs, Command};
+use std::old_io::{fs, Command};
 use std::os;
-use std::io::process::InheritFd;
+use std::old_io::process::InheritFd;
 
 fn main() {
     let manifest_dir = Path::new(os::getenv("PWD").unwrap());
