@@ -3,8 +3,7 @@ use std::os;
 use std::old_io::process::InheritFd;
 
 fn main() {
-    let manifest_dir = Path::new(os::getenv("PWD").unwrap());
-    let out_dir = Path::new(os::getenv("OUT_DIR").unwrap());
+    let manifest_dir = Path::new(os::getenv("CARGO_MANIFEST_DIR").unwrap());
     let src_dir = manifest_dir.join("src");
     let wren_dir = src_dir.join("wren");
     let wren_lib = wren_dir.join("libwren.a");
@@ -19,9 +18,5 @@ fn main() {
                 .unwrap()
                 .success());
 
-    if let Err(_) = fs::copy(&wren_lib, &out_dir.join("libwren.a")) {
-        println!("ERROR COPYING libwren.a");
-    }
-
-    println!("cargo:rustc-flags=-L {} -l wren:static", out_dir.display());
+    println!("cargo:rustc-flags=-L {} -l wren:static", wren_dir.display());
 }
