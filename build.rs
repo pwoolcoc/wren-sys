@@ -1,12 +1,14 @@
-use std::old_io::{fs, Command};
-use std::os;
+#![feature(io)]
+#![feature(path)]
+#![feature(env)]
+use std::env;
+use std::old_io::{Command};
 use std::old_io::process::InheritFd;
 
 fn main() {
-    let manifest_dir = Path::new(os::getenv("CARGO_MANIFEST_DIR").unwrap());
+    let manifest_dir = Path::new(env::var("CARGO_MANIFEST_DIR").unwrap());
     let src_dir = manifest_dir.join("src");
     let wren_dir = src_dir.join("wren");
-    let wren_lib = wren_dir.join("libwren.a");
 
     let mut make = Command::new("make");
 
