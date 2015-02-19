@@ -1,7 +1,7 @@
 [package]
 
 name = "wren-sys"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["Paul Woolcock <paul@woolcock.us>"]
 links = "wren"
 build = "build.rs"
