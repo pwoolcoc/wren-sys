@@ -6,7 +6,7 @@ fn main() {
     let manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let manifest_path = Path::new(&manifest_dir);
     let src_dir = manifest_path.join("src");
-    let wren_dir = src_dir.join("wren");
+    let wren_dir = src_dir.join("wren/lib");
 
     let mut make = Command::new("make");
 
