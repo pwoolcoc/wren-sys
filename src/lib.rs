@@ -1,8 +1,8 @@
 #![allow(non_snake_case)]
 #![feature(libc)]
+#![feature(convert)]
 extern crate libc;
 
-#[derive(Copy)]
 pub enum StructWrenVM { }
 pub type WrenVM = StructWrenVM;
 pub type WrenReallocateFn =
@@ -15,7 +15,6 @@ pub type WrenForeignMethodFn =
 pub type WrenLoadModuleFn =
     extern "C" fn(vm: *mut WrenVM, name: *const ::libc::c_char) -> *const ::libc::c_char;
 #[repr(C)]
-#[derive(Copy)]
 pub struct Struct_Unnamed1 {
     pub reallocateFn: WrenReallocateFn,
     pub loadModuleFn: WrenLoadModuleFn,
@@ -62,21 +61,20 @@ extern "C" {
     use super::{wrenNewVM, WrenConfiguration, wrenInterpret,
                 wrenFreeVM, WREN_RESULT_SUCCESS, };
     use std::ffi::OsStr;
-    use std::os::unix::prelude::OsStrExt;
 
     #[test]
     fn test_new_vm() {
         unsafe {
             let mut config: WrenConfiguration = Default::default();
             let vm = wrenNewVM(&mut config);
-            let source_path = OsStr::from_str("").to_cstring().as_ptr();
-            let source = OsStr::from_str(r#"
+            let source_path = OsStr::new("").to_cstring().unwrap().as_ptr();
+            let source = OsStr::new(r#"
 class Unicorn {
     hasHorn {
         return true
     }
 }
-            "#).to_cstring().as_ptr();
+            "#).to_cstring().unwrap().as_ptr();
             let result = wrenInterpret(vm, source_path, source);
             assert_eq!(result, WREN_RESULT_SUCCESS);
             wrenFreeVM(vm);
