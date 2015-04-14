@@ -5,20 +5,28 @@ pub enum StructWrenVM { }
 pub type WrenVM = StructWrenVM;
 pub type WrenReallocateFn =
     ::std::option::Option<extern "C" fn
-                              (memory: *mut ::libc::c_void, oldSize: ::libc::size_t,
+                              (memory: *mut ::libc::c_void,
                                newSize: ::libc::size_t) -> *mut ::libc::c_void>;
 pub type WrenForeignMethodFn =
     ::std::option::Option<extern "C" fn(vm: *mut WrenVM)>;
 
 pub type WrenLoadModuleFn =
     extern "C" fn(vm: *mut WrenVM, name: *const ::libc::c_char) -> *const ::libc::c_char;
+
+pub type WrenBindForeignMethodFn  =
+    ::std::option::Option<extern "C" fn(vm: *mut WrenVM, module: *const ::libc::c_char,
+                                   className: *const ::libc::c_char,
+                                   is_static: ::libc::c_uint,
+                                   signature: *const ::libc::c_char) -> *mut WrenForeignMethodFn>;
+
 #[repr(C)]
 pub struct Struct_Unnamed1 {
-    pub reallocateFn: WrenReallocateFn,
-    pub loadModuleFn: WrenLoadModuleFn,
-    pub initialHeapSize: ::libc::size_t,
-    pub minHeapSize: ::libc::size_t,
-    pub heapGrowthPercent: ::libc::c_int,
+    reallocateFn: WrenReallocateFn,
+    loadModuleFn: WrenLoadModuleFn,
+    bindForeignMethodFn: WrenBindForeignMethodFn,
+    initialHeapSize: ::libc::size_t,
+    minHeapSize: ::libc::size_t,
+    heapGrowthPercent: ::libc::c_int,
 }
 impl ::std::default::Default for Struct_Unnamed1 {
     fn default() -> Struct_Unnamed1 { unsafe { ::std::mem::zeroed() } }
@@ -72,6 +80,8 @@ class Unicorn {
         return true
     }
 }
+
+IO.print("hello, world")
             "#).unwrap().as_ptr();
             let result = wrenInterpret(vm, source_path, source);
             assert_eq!(result, WREN_RESULT_SUCCESS);
