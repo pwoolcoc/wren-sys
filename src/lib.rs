@@ -1,6 +1,4 @@
 #![allow(non_snake_case)]
-#![feature(libc)]
-#![feature(convert)]
 extern crate libc;
 
 pub enum StructWrenVM { }
@@ -60,21 +58,21 @@ extern "C" {
     use std::default::Default;
     use super::{wrenNewVM, WrenConfiguration, wrenInterpret,
                 wrenFreeVM, WREN_RESULT_SUCCESS, };
-    use std::ffi::OsStr;
+    use std::ffi::CString;
 
     #[test]
     fn test_new_vm() {
         unsafe {
             let mut config: WrenConfiguration = Default::default();
             let vm = wrenNewVM(&mut config);
-            let source_path = OsStr::new("").to_cstring().unwrap().as_ptr();
-            let source = OsStr::new(r#"
+            let source_path = CString::new("").unwrap().as_ptr();
+            let source = CString::new(r#"
 class Unicorn {
     hasHorn {
         return true
     }
 }
-            "#).to_cstring().unwrap().as_ptr();
+            "#).unwrap().as_ptr();
             let result = wrenInterpret(vm, source_path, source);
             assert_eq!(result, WREN_RESULT_SUCCESS);
             wrenFreeVM(vm);
