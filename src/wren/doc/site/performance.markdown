@@ -7,84 +7,82 @@ seem to like them, so here's a few:
 <h3>Method Call</h3>
 <table class="chart">
   <tr>
-    <th>wren</th><td><div class="chart-bar wren" style="width: 99%;">5100&nbsp;</div></td>
+    <th>wren</th><td><div class="chart-bar wren" style="width: 11%;">0.15s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>luajit (-joff)</th><td><div class="chart-bar" style="width: 87%;">4441&nbsp;</div></td>
+    <th>luajit (-joff)</th><td><div class="chart-bar" style="width: 17%;">0.23s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>ruby</th><td><div class="chart-bar" style="width: 56%;">2868&nbsp;</div></td>
+    <th>ruby</th><td><div class="chart-bar" style="width: 26%;">0.36s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>lua</th><td><div class="chart-bar" style="width: 34%;">1742&nbsp;</div></td>
+    <th>lua</th><td><div class="chart-bar" style="width: 43%;">0.58s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python3</th><td><div class="chart-bar" style="width: 17%;">884&nbsp;</div></td>
+    <th>python3</th><td><div class="chart-bar" style="width: 88%;">1.18s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python</th><td><div class="chart-bar" style="width: 15%;">779&nbsp;</div></td>
+    <th>python</th><td><div class="chart-bar" style="width: 100%;">1.33s&nbsp;</div></td>
   </tr>
 </table>
 <h3>DeltaBlue</h3>
 <table class="chart">
   <tr>
-    <th>wren</th><td><div class="chart-bar wren" style="width: 99%;">7006&nbsp;</div></td>
+    <th>wren</th><td><div class="chart-bar wren" style="width: 27%;">0.13s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python3</th><td><div class="chart-bar" style="width: 33%;">2333&nbsp;</div></td>
+    <th>python3</th><td><div class="chart-bar" style="width: 94%;">0.44s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python</th><td><div class="chart-bar" style="width: 30%;">2141&nbsp;</div></td>
+    <th>python</th><td><div class="chart-bar" style="width: 100%;">0.47s&nbsp;</div></td>
   </tr>
 </table>
 <h3>Binary Trees</h3>
 <table class="chart">
   <tr>
-    <th>luajit (-joff)</th><td><div class="chart-bar" style="width: 99%;">6165&nbsp;</div></td>
+    <th>luajit (-joff)</th><td><div class="chart-bar" style="width: 20%;">0.16s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>wren</th><td><div class="chart-bar wren" style="width: 54%;">3338&nbsp;</div></td>
+    <th>wren</th><td><div class="chart-bar wren" style="width: 39%;">0.29s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>ruby</th><td><div class="chart-bar" style="width: 43%;">2685&nbsp;</div></td>
+    <th>ruby</th><td><div class="chart-bar" style="width: 49%;">0.37s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python3</th><td><div class="chart-bar" style="width: 31%;">1952&nbsp;</div></td>
+    <th>python3</th><td><div class="chart-bar" style="width: 68%;">0.52s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>lua</th><td><div class="chart-bar" style="width: 22%;">1409&nbsp;</div></td>
+    <th>lua</th><td><div class="chart-bar" style="width: 97%;">0.73s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python</th><td><div class="chart-bar" style="width: 21%;">1340&nbsp;</div></td>
+    <th>python</th><td><div class="chart-bar" style="width: 100%;">0.75s&nbsp;</div></td>
   </tr>
 </table>
 <h3>Recursive Fibonacci</h3>
 <table class="chart">
   <tr>
-    <th>luajit (-joff)</th><td><div class="chart-bar" style="width: 99%;">7061&nbsp;</div></td>
+    <th>luajit (-joff)</th><td><div class="chart-bar" style="width: 17%;">0.15s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>ruby</th><td><div class="chart-bar" style="width: 43%;">3100&nbsp;</div></td>
+    <th>wren</th><td><div class="chart-bar wren" style="width: 38%;">0.31s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>lua</th><td><div class="chart-bar" style="width: 40%;">2860&nbsp;</div></td>
+    <th>ruby</th><td><div class="chart-bar" style="width: 40%;">0.33s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>wren</th><td><div class="chart-bar wren" style="width: 34%;">2410&nbsp;</div></td>
+    <th>lua</th><td><div class="chart-bar" style="width: 43%;">0.35s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python</th><td><div class="chart-bar" style="width: 17%;">1253&nbsp;</div></td>
+    <th>python3</th><td><div class="chart-bar" style="width: 96%;">0.78s&nbsp;</div></td>
   </tr>
   <tr>
-    <th>python3</th><td><div class="chart-bar" style="width: 17%;">1252&nbsp;</div></td>
+    <th>python</th><td><div class="chart-bar" style="width: 100%;">0.81s&nbsp;</div></td>
   </tr>
 </table>
 
-**Longer bars are better.** The score is the inverse of the running time, so if
-one language's score is twice another's, that means the language is twice as
-fast. Each benchmark is run ten times and the best time is kept. It only
-measures the time taken to execute the benchmarked code itself, not interpreter
-startup.
+**Shorter bars are better.** Each benchmark is run ten times and the best time
+is kept. It only measures the time taken to execute the benchmarked code
+itself, not interpreter startup.
 
 These were run on my MacBook Pro 2.3 GHz Intel Core i7 with 16 GB of 1,600 MHz
 DDR3 RAM. Tested against Lua 5.2.3, LuaJIT 2.0.2, Python 2.7.5, Python 3.3.4,
@@ -95,7 +93,7 @@ languages benchmarked, including Wren, because Mike Pall is a robot from the
 future.
 
 The benchmark harness and programs are
-[here](https://github.com/munificent/wren/tree/master/benchmark).
+[here](https://github.com/munificent/wren/tree/master/test/benchmark).
 
 ## Why is Wren fast?
 
@@ -235,3 +233,5 @@ very good that you can run Lua on it.
 Wren cares about compatibility, but it requires C99 and IEEE double precision
 floats. That may exclude some edge case hardware, but makes things like NaN
 tagging, computed gotos, and some other tricks possible.
+
+<script src="script.js"></script>

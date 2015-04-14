@@ -71,10 +71,10 @@ use `add` to append a single item to the end:
 You can insert a new element at a specific position using `insert`:
 
     :::dart
-    hirsute.insert("soul patch", 2)
+    hirsute.insert(2, "soul patch")
 
-The first argument is the value to insert, and the second is the index to
-insert it at. All elements following the inserted one will be pushed down to
+The first argument is the index to insert at, and the second is the value to
+insert. All elements following the inserted one will be pushed down to
 make room for it.
 
 It's valid to "insert" after the last element in the list, but only *right*
@@ -83,9 +83,9 @@ back. Doing so counts back from the size of the list *after* it's grown by one:
 
     :::dart
     var letters = ["a", "b", "c"]
-    letters.insert("d", 3)   // OK: inserts at end.
+    letters.insert(3, "d")   // OK: inserts at end.
     IO.print(letters)        // ["a", "b", "c", "d"]
-    letters.insert("e", -2)  // Counts back from size after insert.
+    letters.insert(-2, "e")  // Counts back from size after insert.
     IO.print(letters)        // ["a", "b", "c", "e", "d"]
 
 ## Removing elements
@@ -95,12 +95,16 @@ given position in the list. All following items are shifted up to fill in the
 gap:
 
     :::dart
-    var letters = ["a", "b", "c"]
+    var letters = ["a", "b", "c", "d"]
     letters.removeAt(1)
-    IO.print(letters) // ["a", "c"]
+    IO.print(letters) // ["a", "c", "d"]
+
+The `removeAt` method returns the removed item:
+
+    IO.print(letters.removeAt(1)) // "c"
 
 If you want to remove everything from the list, you can clear it:
 
     :::dart
-    hirsute.clear
+    hirsute.clear()
     IO.print(hirsute) // []

@@ -24,6 +24,11 @@ $link-hover:  hsl(210, 100%, 80%);
 $link-dark:   hsl(210, 60%, 20%);
 $link-glow:  hsla(210, 100%, 50%, 0.4);
 
+$core-link:        hsl(150, 70%, 40%);
+$core-link-hover:  hsl(130, 70%, 70%);
+$core-link-dark:   hsl(160, 60%, 25%);
+$core-link-glow:  hsla(130, 90%, 50%, 0.4);
+
 * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -151,6 +156,7 @@ a {
 main {
   @extend .main-column;
   padding-top: 12px;
+  float:left;
 }
 
 a:hover {
@@ -238,10 +244,73 @@ footer {
   span.se          { color: hsl(30, 80%, 50%); }
 }
 
+// Have a different primary color for the core library docs.
+body.core {
+  header {
+    a {
+      color: $gray-20;
+    }
+
+    a:hover {
+      color: $core-link-hover;
+      text-shadow: 0 0 6px $core-link-glow;
+    }
+  }
+
+  a {
+    color: $core-link;
+  }
+
+  a:hover {
+    color: $core-link-dark;
+  }
+
+  .header-anchor {
+    color: $light;
+  }
+
+  main {
+    h1, h2, h3 {
+      color: $core-link;
+    }
+
+    h2:hover > .header-anchor:hover,
+    h3:hover > .header-anchor:hover {
+      color: $core-link-dark;
+    }
+  }
+
+  footer {
+    a {
+      color: $core-link-hover;
+    }
+
+    a:hover {
+      color: $core-link;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+  }
+
+  th, td {
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+  }
+}
+
 // Bar charts on the performance page.
 table.chart {
-  width: 100%;
-  padding-left: 25px;
+  padding: 5px 0 5px 25px;
 
   td, th {
     line-height: 14px;
@@ -251,7 +320,6 @@ table.chart {
 
   th {
     font-size: 14px;
-    text-align: left;
     width: 100px;
   }
 
@@ -268,6 +336,24 @@ table.chart {
   .chart-bar.wren {
     background: mix($link, $link-dark, 30%);
     border-bottom: solid 1px $link-dark;
+  }
+}
+
+// Precedence table on expressions page.
+table.precedence {
+  th {
+    font: 500 11px $subheader;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $gray-60;
+
+    padding: 6px 0;
+    border-bottom: solid 1px $gray-10;
+  }
+
+  td {
+    padding: 3px 0;
+    border-bottom: solid 1px $gray-10;
   }
 }
 

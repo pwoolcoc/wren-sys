@@ -10,7 +10,7 @@ character array modified in place.
 ## Booleans
 
 A boolean value represents truth or falsehood. There are two boolean literals,
-`true` and `false`. Their class is `Bool`.
+`true` and `false`. Their class is [Bool](core/bool.html).
 
 ## Numbers
 
@@ -26,12 +26,16 @@ from other languages:
     1.0
     -12.34
 
-Numbers are instances of the `Num` class.
+Numbers are instances of the [Num](core/num.html) class.
 
 ## Strings
 
-Strings are chunks of text stored as UTF-8. Their class is `String`. String
-literals are surrounded in double quotes:
+A string is an array of bytes. Typically, they store characters encoded in
+UTF-8, but you can put any byte values in there, even zero or invalid UTF-8
+sequences. (You might have some trouble *printing* the latter to your terminal,
+though.)
+
+String literals are surrounded in double quotes:
 
     :::dart
     "hi there"
@@ -39,6 +43,7 @@ literals are surrounded in double quotes:
 A handful of escape characters are supported:
 
     :::dart
+    "\0" // The NUL byte: 0.
     "\"" // A double quote character.
     "\\" // A backslash.
     "\a" // Alarm beep. (Who uses this?)
@@ -49,7 +54,16 @@ A handful of escape characters are supported:
     "\t" // Tab.
     "\v" // Vertical tab.
 
-A `\u` followed by four hex digits can be used to specify a Unicode code point.
+A `\u` followed by four hex digits can be used to specify a Unicode code point:
+
+    :::dart
+    IO.print("\u0041\u0b83\u00DE") // "AஃÞ"
+
+A `\x` followed by two hex digits specifies a single unencoded byte:
+
+    IO.print("\x48\x69\x2e") // "Hi."
+
+Strings are instances of class [String](core/string.html).
 
 ## Ranges
 
@@ -78,9 +92,12 @@ example:
     var slice = list[1..3]
     IO.print(slice) // ["b", "c", "d"]
 
+Their class is [Range](core/range.html).
+
 ## Null
 
 Wren has a special value `null`, which is the only instance of the class
-`Null`. (Note the difference in case.) It functions a bit like `void` in some
-languages: it indicates the absence of a value. If you call a method that
-doesn't return anything and get its returned value, you get `null` back.
+[Null](core/null.html). (Note the difference in case.) It functions a bit like
+`void` in some languages: it indicates the absence of a value. If you call a
+method that doesn't return anything and get its returned value, you get `null`
+back.

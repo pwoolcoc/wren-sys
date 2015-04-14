@@ -10,14 +10,13 @@ Mac and you can rock a command line, it's just:
     $ make
     $ ./wren
 
-For Mac users, there is also an XCode project in the repo that you can use to
-hack on Wren. That's what I develop in. It builds fine from there but *may* not
-have the exact same build settings. The Makefile is the canonical way to
-compile it.
+Binaries for other configurations are built to `bin/`. Static and shared
+libraries for embedding Wren get built in `lib/`.
 
-For our Windows bretheren, there's still a little work to be done. Ideally, the
-repo would include a Visual Studio solution for building Wren. I don't have a
-Windows machine, but if you do, I would be delighted to take a patch for this.
+For Mac users, there is also an XCode project under `project/xcode`. For
+Windows brethren, `project/msvc2013` contains a Visual Studio solution. Note
+that these may not have the exact same build settings as the makefile. The
+makefile is the "official" way to compile Wren.
 
 ## Interactive mode
 
@@ -70,9 +69,15 @@ Now run:
 
 Neat, right? You're a Wren programmer now! The next step is to [read more
 docs](syntax.html) and learn your way around the language. If you run into
-bugs, or have ideas or questions, any and all of the following work:
+bugs, or have ideas or questions, any of the following work:
 
- *  Tell me on twitter at [@munificentbob](https://twitter.com/intent/user?screen_name=munificentbob).
- *  [File a ticket](https://github.com/munificent/wren/issues) at [the GitHub repo](https://github.com/munificent/wren).
+ *  **Ask on the [Wren mailing list][list].**
+ *  Tell me on twitter at [@munificentbob][twitter].
+ *  [File a ticket][issue] at [the GitHub repo][repo].
  *  Send a pull request.
  *  Email me at [`robert@stuffwithstuff.com`](mailto:robert@stuffwithstuff.com).
+
+[list]: https://groups.google.com/forum/#!forum/wren-lang
+[twitter]: https://twitter.com/intent/user?screen_name=munificentbob
+[issue]: https://github.com/munificent/wren/issues
+[repo]: https://github.com/munificent/wren

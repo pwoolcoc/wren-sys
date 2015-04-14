@@ -1,25 +1,33 @@
-# Intermediate files directory.
-build/
-build_xcode/
-.sass-cache/
-
-# Built files at the top level.
+# Build outputs.
+bin/
+lib/
 wren
-wrend
-libwren.a
-libwrend.a
 
-# XCode user-specific stuff.
-xcuserdata/
-*.xccheckout
+# Intermediate files.
+build/
+.sass-cache/
 
 # I leave a temporary Wren script at the top level so that I can quickly test
 # stuff.
 scratch.wren
 
 # The baseline file is machine-specific, so doesn't get checked in.
-benchmark/baseline.txt
+test/benchmark/baseline.txt
 
-# built docs get copied here, which is presumed to be a separate checkout of
-# the repo so they can be pushed to GitHub Pages.
-gh-pages/
+# XCode user-specific stuff.
+xcuserdata/
+*.xccheckout
+
+# Visual Studio cache files.
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+
+# Visual Studio User-specific files.
+*.suo
+*.user
+*.userosscache
+*.sln.docstates

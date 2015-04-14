@@ -21,8 +21,13 @@ num_test_todos = 0
 num_expects = 0
 num_test_empty = 0
 num_test = 0
+num_benchmark_files = 0
+num_benchmark_todos = 0
+num_benchmark_empty = 0
+num_benchmark = 0
 
-files = itertools.chain(glob.iglob("src/*.[ch]"), glob.iglob("include/*.[ch]"))
+files = itertools.chain(glob.iglob("src/vm/*.[ch]"),
+                        glob.iglob("src/include/*.[ch]"))
 for source_path in files:
   num_files += 1
   with open(source_path, "r") as input:

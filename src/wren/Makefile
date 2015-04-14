@@ -1,77 +1,56 @@
-AR = ar rcu
-# Compiler flags.
-CFLAGS = -std=c99 -Wall -Werror
-# TODO: Add -Wextra.
-DEBUG_CFLAGS = -O0 -DDEBUG
-RELEASE_CFLAGS = -Os
+# Top-level Makefile. This has targets for various utility things. To actually
+# compile Wren itself, it invokes script/wren.mk for the various configurations
+# that Wren can be built with.
 
-# Files.
-SOURCES = $(wildcard src/*.c)
-HEADERS = $(wildcard src/*.h)
-OBJECTS = $(SOURCES:.c=.o)
+# Executables are built to bin/. Libraries are built to lib/.
 
-# Don't include main.c in the shared library.
-DEBUG_OBJECTS = $(subst build/debug/main.o,,$(addprefix build/debug/, $(notdir $(OBJECTS))))
-RELEASE_OBJECTS = $(subst build/release/main.o,,$(addprefix build/release/, $(notdir $(OBJECTS))))
+# A normal, optimized release build for the current CPU architecture.
+release:
+	@ $(MAKE) -f script/wren.mk
+	@ cp bin/wren wren # For convenience, copy the interpreter to the top level.
 
+# A debug build for the current architecture.
+debug:
+	@ $(MAKE) -f script/wren.mk MODE=debug
 
-.PHONY: all clean test builtin docs watchdocs
+# Build all configurations.
+all: debug release
+	@ $(MAKE) -f script/wren.mk LANG=cpp
+	@ $(MAKE) -f script/wren.mk MODE=debug LANG=cpp
+	@ $(MAKE) -f script/wren.mk ARCH=32
+	@ $(MAKE) -f script/wren.mk LANG=cpp ARCH=32
+	@ $(MAKE) -f script/wren.mk MODE=debug ARCH=32
+	@ $(MAKE) -f script/wren.mk MODE=debug LANG=cpp ARCH=32
+	@ $(MAKE) -f script/wren.mk ARCH=64
+	@ $(MAKE) -f script/wren.mk LANG=cpp ARCH=64
+	@ $(MAKE) -f script/wren.mk MODE=debug ARCH=64
+	@ $(MAKE) -f script/wren.mk MODE=debug LANG=cpp ARCH=64
 
-all: release
-
+# Remove all build outputs and intermediate files.
 clean:
-	@rm -rf build wren wrend libwren.a libwrend.a
-
-prep:
-	@mkdir -p build/debug build/release
-
-# Debug build.
-debug: prep wrend
-
-# Debug shared lib
-libwrend.a: $(DEBUG_OBJECTS)
-	$(AR) $@ $^
-
-# Debug command-line interpreter.
-wrend: build/debug/main.o libwrend.a
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -Iinclude -o wrend $^ -lm
-
-# Debug object files.
-build/debug/%.o: src/%.c include/wren.h $(HEADERS)
-	$(CC) -c -fPIC $(CFLAGS) $(DEBUG_CFLAGS) -Iinclude -o $@ $<
-
-# Release build.
-release: prep wren
-
-# Release shared lib
-libwren.a: $(RELEASE_OBJECTS)
-	$(AR) $@ $^
-
-# Release command-line interpreter.
-wren: build/release/main.o libwren.a
-	$(CC) $(CFLAGS) $(RELEASE_CFLAGS) -Iinclude -o wren $^ -lm
-
-# Release object files.
-build/release/%.o: src/%.c include/wren.h $(HEADERS)
-	$(CC) -c -fPIC $(CFLAGS) $(RELEASE_CFLAGS) -Iinclude -o $@ $<
+	@ rm -rf bin
+	@ rm -rf build
+	@ rm -rf lib
 
 # Run the tests against the debug build of Wren.
 test: debug
-	@./script/test.py $(suite)
+	@ ./script/test.py $(suite)
 
 # Take the contents of the scripts under builtin/ and copy them into their
 # respective wren_<name>.c source files.
 builtin:
-	@./script/generate_builtins.py
+	@ ./script/generate_builtins.py
 
 # Generate the Wren site.
 docs:
-	@./script/generate_docs.py
+	@ ./script/generate_docs.py
 
 # Continuously generate the Wren site.
 watchdocs:
-	@./script/generate_docs.py --watch
+	@ ./script/generate_docs.py --watch
 
 # Build the docs and copy them to a local "gh-pages" directory.
 gh-pages: docs
-	cp -r build/docs/. gh-pages
+	@ cp -r build/docs/. build/gh-pages
+
+.PHONY: debug release all clean test builtin docs watchdocs gh-pages

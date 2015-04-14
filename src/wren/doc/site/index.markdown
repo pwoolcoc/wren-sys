@@ -15,10 +15,10 @@ a familiar, modern [syntax][].
     }
 
     var adjectives = new Fiber {
-      ["small", "clean", "fast"].map {|word| Fiber.yield(word) }
+      ["small", "clean", "fast"].each {|word| Fiber.yield(word) }
     }
 
-    while (!adjectives.isDone) IO.print(adjectives.call)
+    while (!adjectives.isDone) IO.print(adjectives.call())
 
  *  **Wren is small.** The codebase is about [5,000 lines][src]. You can
     skim the whole thing in an afternoon. It's *small*, but not *dense*. It
@@ -38,8 +38,8 @@ a familiar, modern [syntax][].
 
  *  **Wren is a scripting language.** Wren is intended for embedding in
     applications. It has no dependencies, a small standard library,
-    and [an easy-to-use C API][embedding]. It's written in warning-free
-    standard C99.
+    and [an easy-to-use C API][embedding]. It compiles cleanly as C99, C++98
+    or anything later.
 
 If you like the sound of this, [give it a try][try]! Even better, you can
 [contribute to Wren itself][contribute].
